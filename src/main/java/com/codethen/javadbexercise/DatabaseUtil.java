@@ -17,10 +17,6 @@ public class DatabaseUtil {
                 "jdbc:mysql://" + host + "/" + schema + "?user=" + user + "&password=" + pwd);
 
 
-        // Alternative option
-        // Connection conn = DriverManager.getConnection(
-        //        "jdbc:mysql://localhost/test?user=root&password=monsql");
-
         return conn;
     }
 

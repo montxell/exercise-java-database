@@ -9,21 +9,14 @@ public class Main {
 
         Class.forName("com.mysql.jdbc.Driver").newInstance();
 
-
-        // Necessary data to connect to a schema of the database server
         String host = "localhost";
         String schema = "test";
         String user = "root";
         String pwd = "monsql";
 
-        // Obtain a connection
         Connection conn = DriverManager.getConnection(
                 "jdbc:mysql://" + host + "/" + schema + "?user=" + user + "&password=" + pwd);
 
-
-        // Alternative option
-        // Connection conn = DriverManager.getConnection(
-        //"jdbc:mysql://localhost/test?user=root&password=monsql");
 
 
         String userToFind = "montse";
@@ -38,7 +31,7 @@ public class Main {
         stmt.setString(1, userToFind);
         ResultSet rs = stmt.executeQuery();
 
-        // Iterate the results
+
         while (rs.next()) {
 
             int id = rs.getInt("id");
@@ -49,7 +42,6 @@ public class Main {
             System.out.println(id + ", " + username + ", " + name + ", " + email);
         }
 
-        // Close the resources
         rs.close();
         stmt.close();
         conn.close();

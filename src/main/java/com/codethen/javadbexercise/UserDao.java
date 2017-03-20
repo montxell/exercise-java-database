@@ -55,10 +55,8 @@ public class UserDao {
 
             final User result;
 
-            // get connection
             conn = DatabaseUtil.getConnection();
 
-            // prepare and execute query
             stmt = conn.prepareStatement("select * from users where id = ?");
             stmt.setInt(1, id);
             rs = stmt.executeQuery();
@@ -78,8 +76,7 @@ public class UserDao {
             return result;
 
 
-        // next code is boilerplate (exception handling and closing resources)
-
+        // boilerplate (exception handling and closing resources)
         } catch(Exception e) {
             throw new RuntimeException("error finding user", e);
         } finally {
@@ -125,7 +122,6 @@ public class UserDao {
 
         try {
 
-            // get connection
             conn = DatabaseUtil.getConnection();
 
             // prepare and execute update
@@ -152,10 +148,8 @@ public class UserDao {
 
         try {
 
-            // get connection
             conn = DatabaseUtil.getConnection();
 
-            // prepare and execute update
             stmt = conn.prepareStatement("update users set name = ? where id = ?");
             stmt.setString(1, user.getName());
             stmt.setInt(2, user.getId());
