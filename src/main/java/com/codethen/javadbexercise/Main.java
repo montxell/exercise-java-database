@@ -12,7 +12,7 @@ public class Main {
         String host = "localhost";
         String schema = "test";
         String user = "root";
-        String pwd = "monsql";
+        String pwd = "moncode83";
 
         Connection conn = DriverManager.getConnection(
                 "jdbc:mysql://" + host + "/" + schema + "?user=" + user + "&password=" + pwd);

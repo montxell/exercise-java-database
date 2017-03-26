@@ -30,7 +30,7 @@ public class MainTestDao {
         userDao.create(newUser);
 
 
-        newUser.setId(4);
+        newUser.setId(9);
         newUser.setName("Montse");
         userDao.update(newUser);
 
