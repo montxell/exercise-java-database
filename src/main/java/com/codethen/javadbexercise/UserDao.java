@@ -36,9 +36,9 @@ public class UserDao {
             return users;
 
         } catch(Exception e) {
-            throw new RuntimeException("error finding user", e);
+            throw new RuntimeException("error finding users", e);
         } finally {
-            firstClose(rs, stmt, conn);
+            DatabaseUtil.close(rs, stmt, conn);
         }
     }
 
@@ -80,36 +80,7 @@ public class UserDao {
         } catch(Exception e) {
             throw new RuntimeException("error finding user", e);
         } finally {
-            firstClose(rs, stmt, conn);
-        }
-    }
-
-
-
-    private User getUser(ResultSet rs) throws SQLException {
-        int id = rs.getInt("id");
-        String username = rs.getString("username");
-        String name = rs.getString("name");
-        String email = rs.getString("email");
-
-        User user = new User();
-        user.setId(id);
-        user.setUsername(username);
-        user.setName(name);
-        user.setEmail(email);
-        return user;
-    }
-
-
-
-    private void firstClose(ResultSet rs, PreparedStatement stmt, Connection conn) {
-        try {
-            rs.close();
-            stmt.close();
-            conn.close();
-
-        } catch (Exception e) {
-            e.printStackTrace();
+            DatabaseUtil.close(rs, stmt, conn);
         }
     }
 
@@ -125,9 +96,10 @@ public class UserDao {
             conn = DatabaseUtil.getConnection();
 
             // prepare and execute update
-            stmt = conn.prepareStatement("insert into users (username, email) values (?, ?)");
+            stmt = conn.prepareStatement("insert into users (username, name, email) values (?, ?, ?)");
             stmt.setString(1, user.getUsername());
-            stmt.setString(2, user.getEmail());
+            stmt.setString(2, user.getName());
+            stmt.setString(3, user.getEmail());
 
             stmt.executeUpdate();
 
@@ -135,7 +107,7 @@ public class UserDao {
         } catch(Exception e) {
             throw new RuntimeException("error creating user", e);
         } finally {
-            secondClose(stmt, conn);
+            DatabaseUtil.close(null, stmt, conn);
         }
     }
 
@@ -150,9 +122,11 @@ public class UserDao {
 
             conn = DatabaseUtil.getConnection();
 
-            stmt = conn.prepareStatement("update users set name = ? where id = ?");
-            stmt.setString(1, user.getName());
-            stmt.setInt(2, user.getId());
+            stmt = conn.prepareStatement("update users set username = ?, name = ?, email = ? where id = ?");
+            stmt.setString(1, user.getUsername());
+            stmt.setString(2, user.getName());
+            stmt.setString(3, user.getEmail());
+            stmt.setInt(4, user.getId());
 
             stmt.executeUpdate();
 
@@ -160,20 +134,50 @@ public class UserDao {
         } catch(Exception e) {
             throw new RuntimeException("error updating user", e);
         } finally {
-            secondClose(stmt, conn);
+            DatabaseUtil.close(null, stmt, conn);
         }
     }
 
 
 
-    private void secondClose(PreparedStatement stmt, Connection conn) {
-        try {
-            stmt.close();
-            conn.close();
+    public void delete(int id) {
 
-        } catch (Exception e) {
-            e.printStackTrace();
+        Connection conn = null;
+        PreparedStatement stmt = null;
+
+        try {
+
+            conn = DatabaseUtil.getConnection();
+
+            stmt = conn.prepareStatement("delete from users where id = ?");
+            stmt.setInt(1, id);
+
+            stmt.executeUpdate();
+
+
+        } catch(Exception e) {
+            throw new RuntimeException("error deleting user", e);
+        } finally {
+            DatabaseUtil.close(null, stmt, conn);
         }
+    }
+
+
+
+    private User getUser(ResultSet rs) throws SQLException {
+
+        int id = rs.getInt("id");
+        String username = rs.getString("username");
+        String name = rs.getString("name");
+        String email = rs.getString("email");
+
+        User user = new User();
+        user.setId(id);
+        user.setUsername(username);
+        user.setName(name);
+        user.setEmail(email);
+
+        return user;
     }
 
 }
