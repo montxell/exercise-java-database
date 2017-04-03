@@ -6,30 +6,43 @@ import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.List;
 
-public class UserDaoSimple extends GenericDao<User>{
+/**
+ * This DAO is much simpler than {@link UserDaoComplex} because it relies on {@link GenericDao}.
+ */
+
+public class UserDaoSimple extends GenericDao<User> implements UserDao {
 
     public UserDaoSimple() {
-        super("users"); // Se le pasa el nombre de la tabla de la clase superior que es la de GenericDao
-    }
+        super("users", User.class); // Se le pasa el nombre de la tabla de la clase superior que es la de GenericDao
+    }                                           // Va a extraer los métodos y propiedades de User, la T es User
 
 
     @Override
     protected User getObject(ResultSet rs) throws SQLException {
 
+        // create instance of the model class
         User user = new User();
+
+
+        // sets values from rs to the instance
         user.setId(rs.getInt("id"));
         user.setUsername(rs.getString("username"));
         user.setName(rs.getString("name"));
         user.setEmail(rs.getString("email"));
 
+        // return instance
         return user;
 
     }
+
+
 
     @Override
     protected List<String> getColumnNames() {
         return Arrays.asList("username", "name", "email");
     }
+
+
 
     @Override
     protected void setValues(User user, PreparedStatement stmt, boolean needsId) throws SQLException {
