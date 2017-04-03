@@ -5,30 +5,38 @@ import org.junit.Test;
 
 import java.util.List;
 
-public class UserDaoTest {
+public class UserServiceTest {
 
     @Test
     public void simpleTest() {
 
-        UserDao userDao = new UserDao();
+        /*
+        UserDaoSimple userDao = new UserDaoSimple();
+
+        UserService userService = new UserService(userDao);
+        */
+
+        // Inline:
+        UserService userService = new UserService(new UserDaoSimple());
 
         // Create users into DB
         User user = new User();
         user.setUsername("u1");
         user.setEmail("u1@test.com");
 
-        userDao.create(user);
+        userService.create(user);
 
         User user2 = new User();
         user2.setUsername("u2");
         user2.setEmail("u2@test.com");
 
-        userDao.create(user2);
+        userService.create(user2);
 
 
         // Get users from DB
 
-        List<User> users = userDao.findAll();
+        // List<User> users = userDao.findAll();
+        List<User> users = userService.findAll();
 
         Assert.assertEquals(2, users.size());
 
@@ -41,7 +49,7 @@ public class UserDaoTest {
         // remove created users
 
         for (User u : users) {
-            userDao.delete(u.getId());
+            new UserDaoComplex().delete(u.getId());
         }
     }
 }
