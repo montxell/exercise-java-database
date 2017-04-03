@@ -16,12 +16,18 @@ public class UserDaoSimple extends GenericDao<User> implements UserDao {
         super("users", User.class); // Se le pasa el nombre de la tabla de la clase superior que es la de GenericDao
     }                                           // Va a extraer los métodos y propiedades de User, la T es User
 
+/* SE QUITA PORQUE SE HA PASADO AL GENERICDAO
 
     @Override
     protected User getObject(ResultSet rs) throws SQLException {
 
         // create instance of the model class
         User user = new User();
+
+        //  no importa esto
+        //Class<? extends User> c1 = user.getClass(); // Quieres saber la clase, a partir de un objeto.
+
+        //Class<User> c2 =  User.class; // Este ya se sabe el tipo
 
 
         // sets values from rs to the instance
@@ -42,8 +48,6 @@ public class UserDaoSimple extends GenericDao<User> implements UserDao {
         return Arrays.asList("username", "name", "email");
     }
 
-
-
     @Override
     protected void setValues(User user, PreparedStatement stmt, boolean needsId) throws SQLException {
         stmt.setString(1, user.getUsername());
@@ -54,4 +58,5 @@ public class UserDaoSimple extends GenericDao<User> implements UserDao {
             stmt.setInt(4, user.getId());
         }
     }
+*/
 }
