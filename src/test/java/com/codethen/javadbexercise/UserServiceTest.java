@@ -9,7 +9,7 @@ import java.util.List;
 public class UserServiceTest {
 
     @Test
-    public void simpleTest() {
+    public void simpleTest() throws Exception {
 
 
         DataSource dataSource = DatabaseUtil.getDataSource();
