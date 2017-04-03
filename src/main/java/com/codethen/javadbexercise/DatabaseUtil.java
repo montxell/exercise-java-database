@@ -1,5 +1,8 @@
 package com.codethen.javadbexercise;
 
+import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
+
+import javax.sql.DataSource;
 import java.sql.*;
 
 public class DatabaseUtil {
@@ -17,6 +20,23 @@ public class DatabaseUtil {
 
         return conn;
     }
+
+
+    public static DataSource getDataSource() {
+
+        String host = "localhost";
+        String schema = "test";
+        String user = "root";
+        String pwd = "moncode83";
+
+        MysqlDataSource dataSource = new MysqlDataSource();
+        dataSource.setURL("jdbc:mysql://" + host + "/" + schema);
+        dataSource.setUser(user);
+        dataSource.setPassword(pwd);
+
+        return dataSource;
+    }
+
 
 
     public static void close(ResultSet rs, PreparedStatement stmt, Connection conn) {
