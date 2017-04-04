@@ -1,10 +1,6 @@
-package com.codethen.javadbexercise;
+package com.codethen.javadbexercise.dao;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.List;
+import com.codethen.javadbexercise.model.User;
 
 /**
  * This DAO is much simpler than {@link UserDaoComplex} because it relies on {@link GenericDao}.

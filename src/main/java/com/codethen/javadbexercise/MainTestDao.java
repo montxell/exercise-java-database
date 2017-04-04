@@ -1,6 +1,9 @@
 package com.codethen.javadbexercise;
 
 
+import com.codethen.javadbexercise.dao.UserDaoComplex;
+import com.codethen.javadbexercise.model.User;
+
 import java.util.List;
 
 public class MainTestDao {

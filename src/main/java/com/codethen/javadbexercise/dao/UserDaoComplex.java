@@ -1,5 +1,8 @@
-package com.codethen.javadbexercise;
+package com.codethen.javadbexercise.dao;
 
+
+import com.codethen.javadbexercise.util.DatabaseUtil;
+import com.codethen.javadbexercise.model.User;
 
 import java.sql.*;
 import java.util.ArrayList;

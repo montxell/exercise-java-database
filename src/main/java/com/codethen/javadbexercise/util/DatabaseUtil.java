@@ -1,4 +1,4 @@
-package com.codethen.javadbexercise;
+package com.codethen.javadbexercise.util;
 
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 

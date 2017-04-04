@@ -1,4 +1,6 @@
-package com.codethen.javadbexercise;
+package com.codethen.javadbexercise.dao;
+
+import com.codethen.javadbexercise.model.User;
 
 import java.util.List;
 

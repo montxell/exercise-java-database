@@ -1,7 +1,9 @@
-package com.codethen.javadbexercise;
+package com.codethen.javadbexercise.dao;
+
+import com.codethen.javadbexercise.util.DatabaseUtil;
+import com.codethen.javadbexercise.util.StringUtils;
 
 import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -146,7 +148,6 @@ public abstract class GenericDao <T>{
             List<String> columnNames = getColumnNames();
 
             String equalQuestion = " = ?";
-
             String columnNameEqualQuestion = StringUtils.join(columnNames, equalQuestion, ", ");
 
             stmt = conn.prepareStatement("update " + tableName + " set " + columnNameEqualQuestion + " where id" + equalQuestion);
@@ -314,7 +315,7 @@ public abstract class GenericDao <T>{
 
             List<String> columnNames = getColumnNames();
 
-            
+
             if (needsId) {
 
                 columnNames.add("id");

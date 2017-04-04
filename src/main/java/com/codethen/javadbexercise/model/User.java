@@ -1,4 +1,12 @@
-package com.codethen.javadbexercise;
+package com.codethen.javadbexercise.model;
+
+
+// Follows the convention of Java beans (more or less) so we can use BeanPropertyRowMapper:
+//
+// - Las propiedades son privadas y tiene getter/setter
+// - El constructor no tiene argumentos
+// - Implementa serializable --> Se puede poner public class User implements Serializable
+
 
 public class User {
 
