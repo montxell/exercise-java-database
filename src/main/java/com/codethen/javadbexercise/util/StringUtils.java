@@ -2,7 +2,7 @@ package com.codethen.javadbexercise.util;
 
 public class StringUtils {
 
-    public static String join(Iterable<?> iterable, String iterComplement, String separator) {
+    public static String join(Iterable<?> iterable, String complementOfIter, String separator) {
 
         StringBuilder sb = new StringBuilder();
 
@@ -10,7 +10,7 @@ public class StringUtils {
 
         for (Object iter : iterable) {
 
-            sb.append(currentSeparator).append(iter).append(iterComplement);
+            sb.append(currentSeparator).append(iter).append(complementOfIter);
 
             currentSeparator = separator;
 
@@ -35,6 +35,14 @@ public class StringUtils {
         }
 
         return sb.toString();
+    }
+
+
+
+    public static String capitalize(String input) {
+
+        return input.substring(0, 1).toUpperCase() + input.substring(1);
+
     }
 
 }

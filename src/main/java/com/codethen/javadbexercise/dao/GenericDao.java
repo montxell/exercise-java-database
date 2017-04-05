@@ -256,10 +256,10 @@ public abstract class GenericDao <T>{
     // Aquí se quiere conseguir //user.setId(rs.getInt("id")); donde 'value' es rs.getInt("id")
 
     private void setValue(T object, Field field, Object value) throws Exception {  // En lugar de int value, Object value
-        String methodName = "set" + org.apache.commons.lang3.StringUtils.capitalize(field.getName()); //  Esto es setId, setUsername, setName...
+        String methodName = "set" + StringUtils.capitalize(field.getName()); //  Esto es setId, setUsername, setName...
         Method setter = type.getMethod(methodName, field.getType());  // Esto representa como si fuera setId(int id). methodName es setId, y field.getType() es int id
                                                                     // En lugar de Integer.class o String.class se coge el tipo general de la propiedad. En getter no se necesita field.getType()
-        setter.invoke(object, value); // esto hace como si fuera user.setId(value) o user.setUsername(value)
+        setter.invoke(object, value); // esto hace como si fuera user.setId(value)/user.setId(rs.getInt("id") o user.setUsername(value)
     }
 
     // field.getClass() te devuelve Field
@@ -325,7 +325,7 @@ public abstract class GenericDao <T>{
             for (int i = 0; i < columnNames.size(); i++) {
 
                 String columnName = columnNames.get(i);
-                String methodName = "get" + org.apache.commons.lang3.StringUtils.capitalize(columnName);  // getUsername, getName, getEmail
+                String methodName = "get" + StringUtils.capitalize(columnName);  // getUsername, getName, getEmail
                 Method getter = type.getMethod(methodName);
 
                 Object getterValue = getter.invoke(object);  // user.getUsername() o user.getName()....
