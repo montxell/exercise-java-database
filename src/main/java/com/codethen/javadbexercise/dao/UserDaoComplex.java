@@ -11,8 +11,7 @@ import java.util.List;
 /** Responsible of talking with the database to read/write users */
 public class UserDaoComplex implements UserDao {
 
-    // Si se implementa el interface se tiene que poner el Override. Si algún metodo no está en el interface el
-    // override lo indica que está mal
+    // If interface is implemented (UserDao) we have to write Override.
 
     @Override
     public List<User> findAll() {

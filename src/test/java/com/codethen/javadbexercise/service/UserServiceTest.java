@@ -19,11 +19,14 @@ public class UserServiceTest {
     public void testFindByDomain() {
 
         // Mock UserDao so it returns some users
+
         // Vamos a falsear la base de datos. Para ello utilizamos la librería mockito que integramos en pom.xml
 
         UserDao userDao = Mockito.mock(UserDao.class);  // Hacemos un UserDao falso, a mockito le pasamos la interface UserDao
 
+
         // Creamos una lista falsa de usuarios con un método genérico
+
         List<User> fakeUsers = Arrays.asList(
                 createUser("pepe@gmail.com"),
                 createUser("jordi@hotmail.com"),
@@ -34,7 +37,6 @@ public class UserServiceTest {
 
 
         // Test UserService method (test is isolated because UserDao is mocked)
-        // Con la base falseada probamos el UserService
 
         UserService userService = new UserService(userDao);
 
@@ -59,19 +61,16 @@ public class UserServiceTest {
 
 
     // Probamos un caso extremo como que no haya usuarios
+
     @Test
     public void testFindByDomainNoUsers() {
 
-        // Mock UserDao so it returns some users
-        // Vamos a falsear la base de datos. Para ello utilizamos la librería mockito que integramos en pom.xml
+        UserDao userDao = Mockito.mock(UserDao.class);
 
-        UserDao userDao = Mockito.mock(UserDao.class);  // Hacemos un UserDao falso, a mockito le pasamos la interface UserDao
-
-        Mockito.when( userDao.findAll() ).thenReturn( Collections.emptyList() ); // Hacemos que no haya ningún usuario
+        Mockito.when( userDao.findAll() ).thenReturn( Collections.emptyList() );   // Hacemos que no haya ningún usuario
 
 
         // Test UserService method (test is isolated because UserDao is mocked)
-        // Con la base falseada probamos el UserService
 
         UserService userService = new UserService(userDao);
 

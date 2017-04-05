@@ -8,7 +8,7 @@ import java.util.stream.Collectors;
 
 public class UserService {
 
-    private UserDao userDao;   // No sabe UserService la clase de userDao, solo que viene del interface UserDao
+    private UserDao userDao;
     // private MailService mailService;
 
 
@@ -33,19 +33,21 @@ public class UserService {
 
 
 
-    public List<User> findByEmailDomain(String domain) {  // --> Para comprobar que está bien el método se hace un test
+    public List<User> findByEmailDomain(String domain) {
 
         // This method could be done by the DAO but for learning purposes
         // let's suppose we have to code the logic here (so we can test it)
 
 
         // return userDao.findByEmailDomain(domain);  --> Suponemos que la base de datos no puede hacer esta búsqueda,
-        //                                                solamente nos da todos los usuarios
+        //                                                solamente nos da todos los usuarios (findAll()).
 
 
         List<User> all = findAll();  // En esta clase ya está el método de userDao.findAll().
 
-        /*
+
+        /*  OPCIÓN 1:
+
         List <User> result = new ArrayList<>();
 
         for(User user : all) {
@@ -55,9 +57,12 @@ public class UserService {
         }
 
         return result;
+
         */
 
-        // Si se hace con stream la obtención del usuario con cierto dominio
+
+        // OPCIÓN 2: STREAM
+
         return all.stream()
                 .filter(u -> u.getEmail().endsWith(domain))
                 .collect(Collectors.toList());

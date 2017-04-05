@@ -1,8 +1,10 @@
 package com.codethen.javadbexercise.util;
 
+// SIMULACIÓN DE StringUtils de la dependency commons.lang
+
 public class StringUtils {
 
-    public static String join(Iterable<?> iterable, String complementOfIter, String separator) {
+    public static String join(Iterable<?> iterable, String strOptionalForIter, String separator) {
 
         StringBuilder sb = new StringBuilder();
 
@@ -10,7 +12,7 @@ public class StringUtils {
 
         for (Object iter : iterable) {
 
-            sb.append(currentSeparator).append(iter).append(complementOfIter);
+            sb.append(currentSeparator).append(iter).append(strOptionalForIter);
 
             currentSeparator = separator;
 
