@@ -29,7 +29,8 @@ public class UserServiceTest {
                 createUser("jordi@hotmail.com"),
                 createUser("marta@gmail.com"));
 
-        Mockito.when( userDao.findAll() ).thenReturn( fakeUsers );
+        Mockito.when( userDao.findAll() ).thenReturn( fakeUsers );  // Cuando se busquen todos los usuarios de userDao se
+                                                                    // debe devolver la lista de fakeUsers
 
 
         // Test UserService method (test is isolated because UserDao is mocked)
@@ -40,6 +41,9 @@ public class UserServiceTest {
         List<User> users = userService.findByEmailDomain("gmail.com");
 
         Assert.assertEquals(2, users.size());
+
+        Assert.assertEquals("pepe@gmail.com", users.get(0).getEmail());
+        Assert.assertEquals("marta@gmail.com", users.get(1).getEmail());
 
     }
 
